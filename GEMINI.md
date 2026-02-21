@@ -1,16 +1,16 @@
-This `GEMINI.md` outlines the specific coding principles and practices for the `aem` subproject, building upon the [General Coding Principles](../../GEMINI.md) established at the root of the repository.
+This `GEMINI.md` outlines the specific coding principles and practices for the `vollwerk` subproject, building upon the [General Coding Principles](../../GEMINI.md) established at the root of the repository.
 
 ## 1. Test-Driven Development (TDD) for Web Projects
 
-For the `aem` project, TDD will focus on:
+For the `vollwerk` project, TDD will focus on:
 -   **Unit Testing:** JavaScript functions and modules should have dedicated unit tests to ensure individual components work as expected. We will identify appropriate JavaScript testing frameworks (e.g., Jest, Mocha) as needed.
 -   **Integration Testing:** Verify the interaction between different front-end components and potentially with mocked backend APIs.
 -   **End-to-End Testing:** For critical user flows, we will implement end-to-end tests using tools like Cypress or Playwright to simulate user interactions in a browser.
 -   **Visual Regression Testing:** Consider using tools to detect unintentional visual changes in the UI, especially important for a landing page project.
 
-## 2. `aem` Project Standards & Production Readiness
+## 2. `vollwerk` Project Standards & Production Readiness
 
-In addition to the general professional standards, `aem` will adhere to:
+In addition to the general professional standards, `vollwerk` will adhere to:
 -   **Semantic HTML5:** Use appropriate HTML5 elements for structure and meaning.
 -   **Responsive Design:** Ensure the website is fully responsive and accessible across various devices and screen sizes.
 -   **CSS Best Practices:** Utilize SASS for modular, maintainable, and scalable stylesheets. Adhere to naming conventions (e.g., BEM, utility-first where appropriate).
@@ -23,22 +23,22 @@ In addition to the general professional standards, `aem` will adhere to:
 -   **Accessibility (A11Y):** Design and develop with accessibility in mind, following WCAG guidelines.
 -   **Cross-Browser Compatibility:** Ensure consistent functionality and appearance across target browsers.
 
-## 3. `aem` Technologies & Tools
+## 3. `vollwerk` Technologies & Tools
 
-The primary technologies and tools for `aem` include:
+The primary technologies and tools for `vollwerk` include:
 -   **Markup:** HTML5
 -   **Styling:** CSS3, SASS (using `assets/sass` for development)
 -   **Scripting:** JavaScript (ES6+), jQuery (as identified in `assets/js/jquery.min.js`)
 -   **Build/Automation:** Gulp (for SASS compilation, minification, etc.)
 -   **Version Control:** Git (integrated with GitHub)
 
-## 4. `aem` Deployment & CI
+## 4. `vollwerk` Deployment & CI
 
 -   (Details to be added here once deployment strategy is defined, e.g., static site hosting, CDN integration, automated builds via GitHub Actions/GitLab CI)
 
 ---
 
-### Agent's `aem` Optimization Notes:
+### Agent's `vollwerk` Optimization Notes:
 
 -   **Current Observation:** The project previously used `jQuery` and `.min.js` files, and a basic SASS compilation.
 -   **Optimization Achieved:**

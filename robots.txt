@@ -1,14 +1,7 @@
-# Robots.txt for aem-sys.com
-# AI Consulting - Adil El Madbouh
-
+# Robots.txt for vollwerk.de
 User-agent: *
 Allow: /
+Disallow: /assets/
+Disallow: /images/
 
-# Sitemap location
-Sitemap: https://www.aem-sys.com/sitemap.xml
-
-# Crawl-delay (optional, for polite crawling)
-Crawl-delay: 1
-
-# Block common non-content paths (if any exist)
-Disallow: /assets/sass/
+Sitemap: https://www.vollwerk.de/sitemap.xml

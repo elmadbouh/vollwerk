@@ -1,20 +1,20 @@
 {
-    "name": "AEM - AI Consulting",
-    "short_name": "AEM",
-    "description": "KI-Beratung und AI Implementation für den deutschen Mittelstand",
-    "start_url": "/",
+    "name": "Vollwerk - KI-Assistent & AI Agent Experte",
+    "short_name": "Vollwerk",
+    "start_url": ".",
     "display": "standalone",
     "background_color": "#f8f6f3",
     "theme_color": "#8b7355",
+    "description": "KI-Assistent & AI Agent Experte für Privatpersonen und Kleinunternehmen.",
     "icons": [
         {
-            "src": "images/android-chrome-192x192.png",
-            "sizes": "192x192",
+            "src": "images/favicon/favicon-32x32.png",
+            "sizes": "32x32",
             "type": "image/png"
         },
         {
-            "src": "images/android-chrome-512x512.png",
-            "sizes": "512x512",
+            "src": "images/favicon/apple-touch-icon.png",
+            "sizes": "180x180",
             "type": "image/png"
         }
     ]

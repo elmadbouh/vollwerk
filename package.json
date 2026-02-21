@@ -1,33 +1,25 @@
 {
-  "name": "aem",
+  "name": "vollwerk",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Vollwerk - KI-Assistent & AI Agent Experte",
+  "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "gulp build",
-    "watch": "gulp watch",
-    "dev": "gulp dev"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/elmadbouh/aem.git"
+    "url": "git+https://github.com/elmadbouh/vollwerk.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "author": "Adil El Madbouh",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/elmadbouh/aem/issues"
+    "url": "https://github.com/elmadbouh/vollwerk/issues"
   },
-  "homepage": "https://github.com/elmadbouh/aem#readme",
+  "homepage": "https://www.vollwerk.de",
   "devDependencies": {
-    "browser-sync": "^3.0.4",
-    "gulp": "^5.0.1",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-rename": "^2.1.0",
-    "gulp-sass": "^6.0.1",
-    "gulp-uglify": "^3.0.2",
-    "sass": "^1.97.3"
+    "browser-sync": "^3.0.3",
+    "gulp": "^5.0.0",
+    "gulp-sass": "^6.0.0",
+    "sass": "^1.84.0"
   }
 }

@@ -4,7 +4,7 @@
 
 You are an executive-level UX, UI, and SEO expert specializing in professional brand transformation and digital strategy.
 
-## Project: Adil El Madbouh (AEM) Brand Transformation
+## Project: Adil El Madbouh (Vollwerk) Brand Transformation
 
 ### Objective
 
