@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vollwerk.de — Business Card v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* Directly from aem-sys.com palette — enhanced */
+    --bg-page:       #EDEAE2;
+    --bg-card:       #FDFAF5;
+    --bg-card-alt:   #F7F3EB;
+    --brown:         #7C6040;
+    --brown-mid:     #9B7A52;
+    --brown-light:   #B8956A;
+    --brown-pale:    #D4B896;
+    --brown-wash:    #EDE3D6;
+    --text-primary:  #2A2318;
+    --text-body:     #4A4035;
+    --text-muted:    #9A8E82;
+    --border:        rgba(124,96,64,0.18);
+    --border-light:  rgba(124,96,64,0.10);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  body {
+    background: var(--bg-page);
+    background-image:
+      radial-gradient(ellipse at 15% 15%, #E8E3D8 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 85%, #E2DDD4 0%, transparent 55%);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 56px 24px 80px;
+    gap: 0;
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    text-align: center;
+    margin-bottom: 48px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 10px;
+  }
+
+  .brand-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  .brand-title .w  { color: var(--brown); }
+  .brand-title .de {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--brown-light);
+    vertical-align: middle;
+    margin-left: 1px;
+  }
+
+  .page-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── CARD WRAPPER ── */
+  .card-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    animation: fadeUp 0.5s ease 0.12s both;
+  }
+
+  .section-label {
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ── CARD BASE ── */
+  .card {
+    width: 354px;
+    height: 200px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.23,1,0.32,1),
+                box-shadow 0.4s ease;
+    cursor: default;
+  }
+
+  .card:hover {
+    transform: translateY(-5px) rotate(-0.6deg) scale(1.01);
+  }
+
+  /* ════════════════════════
+     FRONT
+  ════════════════════════ */
+  .front {
+    background: var(--bg-card);
+    box-shadow:
+      0 1px 3px rgba(90,70,40,0.06),
+      0 6px 20px rgba(90,70,40,0.10),
+      0 20px 50px rgba(90,70,40,0.12);
+  }
+
+  .front:hover {
+    box-shadow:
+      0 2px 6px rgba(90,70,40,0.08),
+      0 12px 32px rgba(90,70,40,0.14),
+      0 32px 64px rgba(90,70,40,0.14);
+  }
+
+  /* Top accent bar — warm brown, fading right */
+  .front .top-bar {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg,
+      var(--brown) 0%,
+      var(--brown-light) 45%,
+      var(--brown-pale) 75%,
+      transparent 100%);
+    z-index: 2;
+  }
+
+  /* Soft warm wash — bottom right triangle */
+  .front .bg-wash {
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, var(--brown-wash) 0%, transparent 65%);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Subtle dot grid — top left */
+  .front .dot-grid {
+    position: absolute;
+    top: 8px; left: 8px;
+    width: 80px;
+    height: 80px;
+    background-image: radial-gradient(circle, var(--brown-pale) 1px, transparent 1px);
+    background-size: 10px 10px;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .front-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    padding: 24px 28px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Logo */
+  .logo-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .logo-mark {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+  }
+
+  .lm-voll {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 27px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+
+  .lm-werk {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 27px;
+    font-weight: 700;
+    color: var(--brown);
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+
+  .lm-ai {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.08em;
+    background: var(--brown);
+    border-radius: 4px;
+    padding: 2px 6px 2px;
+    margin-left: 6px;
+    margin-bottom: 3px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .logo-tagline {
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* Credential pill */
+  .cred-pill {
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    background: var(--brown-wash);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 11px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .cred-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--brown);
+    animation: breathe 2.8s ease infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .cred-txt {
+    font-size: 7.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brown);
+  }
+
+  /* Bottom row */
+  .front-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .person-block {}
+
+  .p-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+  }
+
+  .p-title {
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brown-mid);
+    margin-top: 4px;
+    line-height: 1.7;
+  }
+
+  .contact-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: flex-end;
+  }
+
+  .contact-mini span {
+    font-size: 8px;
+    font-weight: 400;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* Divider line between name and contact */
+  .front-divider {
+    width: 1px;
+    height: 36px;
+    background: var(--border);
+    margin: 0 4px 4px;
+    flex-shrink: 0;
+  }
+
+  /* ════════════════════════
+     BACK
+  ════════════════════════ */
+  .back {
+    background: var(--bg-card-alt);
+    box-shadow:
+      0 1px 3px rgba(90,70,40,0.06),
+      0 6px 20px rgba(90,70,40,0.10),
+      0 20px 50px rgba(90,70,40,0.12);
+  }
+
+  .back:hover {
+    box-shadow:
+      0 2px 6px rgba(90,70,40,0.08),
+      0 12px 32px rgba(90,70,40,0.14),
+      0 32px 64px rgba(90,70,40,0.14);
+  }
+
+  /* Warm horizontal rule lines — very subtle */
+  .back::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 27px,
+      rgba(124,96,64,0.05) 27px,
+      rgba(124,96,64,0.05) 28px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Bottom accent bar */
+  .back .bottom-bar {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg,
+      transparent,
+      var(--brown-pale) 25%,
+      var(--brown) 55%,
+      var(--brown-light) 80%,
+      transparent);
+    z-index: 2;
+  }
+
+  /* Soft wash top-right */
+  .back .bg-wash-back {
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 160px;
+    height: 160px;
+    background: radial-gradient(circle, var(--brown-wash) 0%, transparent 65%);
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .back-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    padding: 18px 22px 18px 20px;
+    display: grid;
+    grid-template-columns: 1fr 72px;
+    grid-template-rows: auto 1fr auto;
+    column-gap: 16px;
+  }
+
+  /* Back logo */
+  .back-logo {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .bl-voll { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 700; color: var(--text-primary); }
+  .bl-werk { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 700; color: var(--brown); }
+  .bl-ai   { font-family: 'DM Sans', sans-serif; font-size: 8px; font-weight: 700; color: white; background: var(--brown); border-radius: 3px; padding: 1px 4px; margin-left: 4px; margin-bottom: 2px; letter-spacing: 0.08em; }
+
+  /* Value props */
+  .vprops {
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    justify-content: center;
+    padding: 2px 0;
+  }
+
+  .vp {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+  }
+
+  .vp-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--brown);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .vp-body {}
+
+  .vp-title {
+    font-size: 8.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .vp-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10.5px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-body);
+    line-height: 1.3;
+    margin-top: 1px;
+  }
+
+  /* Stats row */
+  .stats-row {
+    grid-column: 1;
+    grid-row: 3;
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+    padding-top: 9px;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    text-align: center;
+  }
+  .stat-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--brown);
+    line-height: 1;
+  }
+
+  .stat-l {
+    font-size: 7px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .stat-sep {
+    width: 1px;
+    background: var(--border);
+    flex-shrink: 0;
+    align-self: stretch;
+    margin: 2px 0;
+  }
+
+  /* QR column */
+  .qr-col {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-left: 1px solid var(--border-light);
+    padding-left: 14px;
+  }
+
+  .qr-frame {
+    width: 58px;
+    height: 58px;
+    border: 1.5px solid var(--brown-pale);
+    border-radius: 7px;
+    padding: 5px;
+    background: white;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 1.5px;
+  }
+
+  .q { background: var(--brown); border-radius: 1px; }
+  .e { background: transparent; }
+
+  .qr-scan {
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .qr-domain {
+    font-size: 7.5px;
+    font-weight: 600;
+    color: var(--brown);
+    letter-spacing: 0.03em;
+  }
+
+  /* ── SPACER ── */
+  .flip-spacer {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    animation: fadeUp 0.5s ease 0.24s both;
+  }
+
+  .flip-line {
+    height: 1px;
+    width: 90px;
+    background: linear-gradient(90deg, transparent, var(--brown-pale), transparent);
+  }
+
+  .flip-txt {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ── BOTTOM PANELS ── */
+  .panels {
+    width: 100%;
+    max-width: 780px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    animation: fadeUp 0.5s ease 0.36s both;
+  }
+
+  @media (max-width: 620px) {
+    .panels { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+
+  .panel-title {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brown);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-light);
+    margin-bottom: 14px;
+  }
+
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    font-size: 11.5px;
+    border-bottom: 1px solid #F5F0E8;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-row .sk { color: var(--text-muted); }
+  .spec-row .sv { color: var(--text-primary); font-weight: 600; }
+
+  .swatches { display: flex; gap: 6px; align-items: center; }
+  .sw { width: 17px; height: 17px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.06); }
+
+  /* Checklist */
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 14px;
+    padding-top: 13px;
+    border-top: 1px solid var(--border-light);
+  }
+
+  .ci {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--text-body);
+    line-height: 1.4;
+  }
+
+  .ci-o { color: #C07030; font-size: 11px; flex-shrink: 0; }
+  .ci-x { color: #3A8A5A; font-size: 11px; flex-shrink: 0; }
+
+  /* Pitch panel */
+  .pitch-panel {
+    background: #FBF7F0;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--brown);
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+
+  .pitch-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--text-primary);
+    line-height: 1.35;
+    margin-bottom: 13px;
+  }
+
+  .pitch-body {
+    font-size: 11.5px;
+    color: var(--text-body);
+    line-height: 1.65;
+  }
+
+  .pitch-body strong { color: var(--text-primary); font-weight: 600; }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div class="eyebrow">Business Card · Version 2</div>
+    <div class="brand-title">
+      Voll<span class="w">werk</span> <span style="font-family:'DM Sans',sans-serif; font-size:22px; font-weight:700; color:white; background:var(--brown); border-radius:6px; padding:3px 10px; vertical-align:middle; letter-spacing:0.06em;">AI</span>
+    </div>
+    <div class="page-sub">Adil El Madbouh · Gründer · AI Consultant &amp; Delivery Manager · Kronberg im Taunus</div>
+  </div>
+
+  <!-- FRONT -->
+  <div class="card-section">
+    <div class="section-label">— Vorderseite · Front —</div>
+    <div class="card front">
+      <div class="top-bar"></div>
+      <div class="bg-wash"></div>
+      <div class="dot-grid"></div>
+      <div class="front-content">
+
+        <div class="logo-row">
+          <div class="logo-mark">
+            <span class="lm-voll">Voll</span><span class="lm-werk">werk</span><span class="lm-ai">AI</span>
+          </div>
+          <div class="logo-tagline">KI-Projekte · Vollständig geliefert</div>
+        </div>
+
+        <div class="cred-pill">
+          <div class="cred-dot"></div>
+          <span class="cred-txt">20+ Jahre Finance IT</span>
+        </div>
+
+        <div class="front-bottom">
+          <div class="person-block">
+            <div class="p-name">Adil El Madbouh</div>
+            <div class="p-title">Gründer<br>AI Consultant &amp; Delivery Manager</div>
+          </div>
+          <div class="front-divider"></div>
+          <div class="contact-mini">
+            <span>adil@vollwerk.de</span>
+            <span>+49 176 6343 1659</span>
+            <span>vollwerk.de</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FLIP DIVIDER -->
+  <div class="flip-spacer">
+    <div class="flip-line"></div>
+    <div class="flip-txt">Rückseite</div>
+    <div class="flip-line"></div>
+  </div>
+
+  <!-- BACK -->
+  <div class="card-section">
+    <div class="section-label">— Rückseite · Back — Sales Active</div>
+    <div class="card back">
+      <div class="bottom-bar"></div>
+      <div class="bg-wash-back"></div>
+      <div class="back-content">
+
+        <div class="back-logo">
+          <span class="bl-voll">Voll</span><span class="bl-werk">werk</span><span class="bl-ai">AI</span>
+        </div>
+
+        <div class="vprops">
+          <div class="vp">
+            <div class="vp-dot"></div>
+            <div class="vp-body">
+              <div class="vp-title">KI-Projekte — Von A bis Z</div>
+              <div class="vp-sub">Strategie, Umsetzung &amp; Betrieb aus einer Hand</div>
+            </div>
+          </div>
+          <div class="vp">
+            <div class="vp-dot"></div>
+            <div class="vp-body">
+              <div class="vp-title">Automatisierung &gt;70%</div>
+              <div class="vp-sub">Routineaufgaben — sicher, DSGVO-konform, kostenoptimiert</div>
+            </div>
+          </div>
+          <div class="vp">
+            <div class="vp-dot"></div>
+            <div class="vp-body">
+              <div class="vp-title">4 klare Phasen zum Ziel</div>
+              <div class="vp-sub">Strukturiert vom Kick-off bis zum optimierten Betrieb</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat">
+            <div class="stat-n">20+</div>
+            <div class="stat-l">Jahre IT</div>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="stat">
+            <div class="stat-n">&gt;70%</div>
+            <div class="stat-l">Automatisierung</div>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="stat">
+            <div class="stat-n">4</div>
+            <div class="stat-l">Schritte</div>
+          </div>
+        </div>
+
+        <div class="qr-col">
+          <div class="qr-frame">
+            <div class="q"></div><div class="q"></div><div class="q"></div><div class="e"></div><div class="q"></div><div class="q"></div><div class="q"></div>
+            <div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div>
+            <div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div>
+            <div class="e"></div><div class="e"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div>
+            <div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div>
+            <div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div>
+            <div class="q"></div><div class="q"></div><div class="q"></div><div class="e"></div><div class="q"></div><div class="q"></div><div class="q"></div>
+          </div>
+          <div class="qr-scan">Scan</div>
+          <div class="qr-domain">vollwerk.de</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FLIP SPACER 2 -->
+  <div class="flip-spacer" style="height:52px;">
+    <div class="flip-line" style="width:140px;"></div>
+  </div>
+
+  <!-- BOTTOM PANELS -->
+  <div class="panels">
+
+    <div class="panel">
+      <div class="panel-title">📋 Druckspezifikationen</div>
+      <div class="spec-row"><span class="sk">Format</span><span class="sv">85 × 54 mm (EU-Standard)</span></div>
+      <div class="spec-row"><span class="sk">Papier</span><span class="sv">450g Soft-Touch Matte</span></div>
+      <div class="spec-row"><span class="sk">Veredelung</span><span class="sv">Spot-UV auf Logo + Name</span></div>
+      <div class="spec-row"><span class="sk">Auflage</span><span class="sv">250 Karten empfohlen</span></div>
+      <div class="spec-row">
+        <span class="sk">Farben</span>
+        <span class="sv">
+          <div class="swatches">
+            <div class="sw" style="background:#7C6040;" title="Warm Brown"></div>
+            <div class="sw" style="background:#B8956A;" title="Brass Light"></div>
+            <div class="sw" style="background:#FDFAF5;" title="Warm White"></div>
+            <div class="sw" style="background:#F7F3EB;" title="Cream"></div>
+          </div>
+        </span>
+      </div>
+      <div class="spec-row"><span class="sk">Drucker (DE)</span><span class="sv">moo.com · printclub.de</span></div>
+      <div class="spec-row"><span class="sk">Lieferzeit</span><span class="sv">ca. 5–7 Werktage</span></div>
+
+      <div class="checklist">
+        <div class="ci"><span class="ci-x">✓</span><span>Domain <strong>vollwerk.de</strong> registriert ✅</span></div>
+        <div class="ci"><span class="ci-o">○</span><span>E-Mail <strong>adil@vollwerk.de</strong> einrichten</span></div>
+        <div class="ci"><span class="ci-o">○</span><span>Website auf <strong>Vollwerk</strong> ummünzen</span></div>
+        <div class="ci"><span class="ci-o">○</span><span>QR-Code mit echtem Link ersetzen</span></div>
+        <div class="ci"><span class="ci-o">○</span><span>Druckdatei als PDF/X-4 exportieren</span></div>
+      </div>
+    </div>
+
+    <div class="pitch-panel">
+      <div class="panel-title">🎤 BNI-Pitch · 60 Sekunden</div>
+      <div class="pitch-quote">"Ich bin Adil — Gründer von Vollwerk."</div>
+      <div class="pitch-body">
+        Vollwerk steht für das Versprechen, das die meisten KI-Berater nicht geben können: <strong>ich liefere das Projekt vollständig</strong> — von der ersten Analyse bis zum laufenden Betrieb.<br><br>
+        Mit über 20 Jahren Erfahrung in europäischen Finanzinstituten helfe ich Mittelstandsunternehmen, bis zu <strong>80% ihrer täglichen Routineaufgaben zu automatisieren</strong> — sicher, DSGVO-konform, ohne ihre Daten aus der Hand zu geben.<br><br>
+        <strong>Ich suche Unternehmer, die wissen, dass KI sie weiterbringt — aber noch niemanden gefunden haben, dem sie es anvertrauen können.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
