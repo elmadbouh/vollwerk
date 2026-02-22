@@ -524,10 +524,15 @@
     border-radius: 7px;
     padding: 5px;
     background: white;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(7, 1fr);
-    gap: 1.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .qr-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .q { background: var(--brown); border-radius: 1px; }
@@ -779,13 +784,7 @@
 
         <div class="qr-col">
           <div class="qr-frame">
-            <div class="q"></div><div class="q"></div><div class="q"></div><div class="e"></div><div class="q"></div><div class="q"></div><div class="q"></div>
-            <div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div>
-            <div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div>
-            <div class="e"></div><div class="e"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div>
-            <div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div>
-            <div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div><div class="e"></div><div class="q"></div>
-            <div class="q"></div><div class="q"></div><div class="q"></div><div class="e"></div><div class="q"></div><div class="q"></div><div class="q"></div>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://vollwerk.de&color=7C6040" alt="QR Code vollwerk.de">
           </div>
           <div class="qr-scan">Scan</div>
           <div class="qr-domain">vollwerk.de</div>
@@ -827,8 +826,8 @@
         <div class="ci"><span class="ci-x">✓</span><span>Domain <strong>vollwerk.de</strong> registriert ✅</span></div>
         <div class="ci"><span class="ci-o">○</span><span>E-Mail <strong>adil@vollwerk.de</strong> einrichten</span></div>
         <div class="ci"><span class="ci-o">○</span><span>Website auf <strong>Vollwerk</strong> ummünzen</span></div>
-        <div class="ci"><span class="ci-o">○</span><span>QR-Code mit echtem Link ersetzen</span></div>
-        <div class="ci"><span class="ci-o">○</span><span>Druckdatei als PDF/X-4 exportieren</span></div>
+        <div class="ci"><span class="ci-x">✓</span><span>QR-Code mit Link (vollwerk.de) ✅</span></div>
+        <div class="ci"><span class="ci-x">✓</span><span>Druckdatei als PDF/X-4 (Front &amp; Back) ✅</span></div>
       </div>
     </div>
 
