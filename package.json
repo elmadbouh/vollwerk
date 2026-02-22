@@ -1,7 +1,7 @@
 {
   "name": "vollwerk",
   "version": "1.0.0",
-  "description": "Vollwerk - KI-Assistent & AI Agent Experte",
+  "description": "Vollwerk - AI Consultant & Delivery Manager",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

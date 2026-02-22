@@ -1,11 +1,11 @@
 {
-    "name": "Vollwerk - KI-Assistent & AI Agent Experte",
+    "name": "Vollwerk - AI Consultant & Delivery Manager",
     "short_name": "Vollwerk",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#f8f6f3",
     "theme_color": "#8b7355",
-    "description": "KI-Assistent & AI Agent Experte für Privatpersonen und Kleinunternehmen.",
+    "description": "AI Consultant & Delivery Manager für mittelständische Unternehmen.",
     "icons": [
         {
             "src": "images/favicon/favicon-32x32.png",
