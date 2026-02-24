@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flotten-Dashboard — Transportunternehmen | Vollwerk</title>
+    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/fontawesome-all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#f4f5f7;--bg2:#ffffff;--card:#ffffff;--card-hover:#f9fafb;
+            --border:#e5e7eb;--border-light:#f0f1f3;
+            --text:#1a1a1a;--text2:#4a4a4a;--muted:#7a7a7a;
+            --accent:#3b82f6;--accent2:#2563eb;
+            --green:#16a34a;--green-bg:rgba(22,163,74,0.08);
+            --yellow:#ca8a04;--yellow-bg:rgba(202,138,4,0.08);
+            --red:#dc2626;--red-bg:rgba(220,38,38,0.08);
+            --orange:#ea580c;--orange-bg:rgba(234,88,12,0.08);
+            --warm:#8b7355;
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh}
+
+        /* ── Top bar ── */
+        .topbar{background:rgba(255,255,255,0.92);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+        .topbar-left{display:flex;align-items:center;gap:16px}
+        .topbar-logo{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text);font-weight:700;font-size:0.95rem}
+        .topbar-logo .logo-box{width:28px;height:28px;background:linear-gradient(135deg,var(--warm),#5c4d3d);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:800;color:white}
+        .topbar-sep{width:1px;height:24px;background:var(--border)}
+        .topbar-title{font-size:0.95rem;font-weight:600;color:var(--text2)}
+        .topbar-right{display:flex;align-items:center;gap:16px}
+        .topbar-time{font-size:0.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+        .topbar-back{display:inline-flex;align-items:center;gap:6px;color:var(--text2);text-decoration:none;font-size:0.85rem;padding:6px 14px;border-radius:8px;border:1px solid var(--border);transition:all 0.2s}
+        .topbar-back:hover{background:var(--card);color:var(--text)}
+
+        /* ── Summary strip ── */
+        .summary{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;padding:20px 24px;background:var(--bg)}
+        .summary-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+        .summary-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+        .summary-icon.blue{background:rgba(59,130,246,0.15);color:var(--accent)}
+        .summary-icon.green{background:var(--green-bg);color:var(--green)}
+        .summary-icon.yellow{background:var(--yellow-bg);color:var(--yellow)}
+        .summary-icon.red{background:var(--red-bg);color:var(--red)}
+        .summary-icon.orange{background:var(--orange-bg);color:var(--orange)}
+        .summary-value{font-size:1.5rem;font-weight:800;line-height:1}
+        .summary-label{font-size:0.75rem;color:var(--muted);margin-top:2px}
+
+        /* ── Main layout ── */
+        .main{display:grid;grid-template-columns:360px 1fr;gap:0;min-height:calc(100vh - 160px)}
+        .sidebar{background:var(--bg2);border-right:1px solid var(--border);overflow-y:auto;max-height:calc(100vh - 160px);box-shadow:1px 0 4px rgba(0,0,0,0.04)}
+        .sidebar-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--bg2);z-index:10}
+        .sidebar-title{font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted)}
+        .sidebar-filter{display:flex;gap:6px}
+        .filter-btn{padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:0.75rem;cursor:pointer;font-family:inherit;transition:all 0.2s}
+        .filter-btn:hover,.filter-btn.active{background:var(--accent);border-color:var(--accent);color:white}
+
+        /* ── Truck list ── */
+        .truck-list{padding:8px}
+        .truck-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;cursor:pointer;transition:all 0.15s;border:1px solid transparent;margin-bottom:4px}
+        .truck-item:hover{background:var(--card);border-color:var(--border)}
+        .truck-item.active{background:var(--accent);background:rgba(59,130,246,0.12);border-color:rgba(59,130,246,0.3)}
+        .truck-status-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+        .truck-status-dot.unterwegs{background:var(--green);box-shadow:0 0 6px rgba(34,197,94,0.4)}
+        .truck-status-dot.pause{background:var(--yellow);box-shadow:0 0 6px rgba(234,179,8,0.4)}
+        .truck-status-dot.wartung{background:var(--red);box-shadow:0 0 6px rgba(239,68,68,0.4)}
+        .truck-status-dot.beladen{background:var(--orange);box-shadow:0 0 6px rgba(249,115,22,0.4)}
+        .truck-info{flex:1;min-width:0}
+        .truck-name{font-size:0.9rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .truck-sub{font-size:0.75rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .truck-speed{font-size:0.8rem;font-weight:600;color:var(--text2);text-align:right;min-width:50px}
+
+        /* ── Detail panel ── */
+        .detail{padding:24px;overflow-y:auto;max-height:calc(100vh - 160px)}
+        .detail-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--muted);gap:16px;text-align:center}
+        .detail-empty i{font-size:3rem;opacity:0.3}
+        .detail-empty p{font-size:0.95rem}
+
+        .detail-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px}
+        .detail-truck-id{font-size:1.5rem;font-weight:800}
+        .detail-status{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;font-size:0.8rem;font-weight:600}
+        .detail-status.unterwegs{background:var(--green-bg);color:var(--green)}
+        .detail-status.pause{background:var(--yellow-bg);color:var(--yellow)}
+        .detail-status.wartung{background:var(--red-bg);color:var(--red)}
+        .detail-status.beladen{background:var(--orange-bg);color:var(--orange)}
+
+        .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+        .detail-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+        .detail-card-title{font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;font-weight:600}
+        .detail-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)}
+        .detail-row:last-child{border-bottom:none}
+        .detail-row-label{font-size:0.85rem;color:var(--text2)}
+        .detail-row-value{font-size:0.85rem;font-weight:600;font-variant-numeric:tabular-nums}
+
+        .detail-card.full{grid-column:1/-1}
+
+        /* Map placeholder */
+        .map-placeholder{background:var(--card);border:1px solid var(--border);border-radius:12px;height:220px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;margin-bottom:24px}
+        .map-placeholder::before{content:'';position:absolute;inset:0;background:
+            radial-gradient(circle at 20% 60%,rgba(59,130,246,0.06) 0%,transparent 50%),
+            radial-gradient(circle at 70% 30%,rgba(22,163,74,0.05) 0%,transparent 50%),
+            linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(244,245,247,0.6) 100%);
+        }
+        .map-grid{position:absolute;inset:0;background-image:
+            linear-gradient(var(--border) 1px, transparent 1px),
+            linear-gradient(90deg, var(--border) 1px, transparent 1px);
+        background-size:40px 40px;opacity:0.3}
+        .map-pin{position:absolute;display:flex;flex-direction:column;align-items:center;z-index:2;transition:transform 0.2s}
+        .map-pin i{font-size:1.4rem;color:var(--accent);filter:drop-shadow(0 2px 4px rgba(59,130,246,0.4))}
+        .map-pin-label{font-size:0.65rem;font-weight:600;color:var(--text);background:var(--card);border:1px solid var(--border);padding:2px 6px;border-radius:4px;margin-top:2px;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,0.08)}
+
+        /* Progress bars */
+        .progress-bar{height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden;margin-top:6px}
+        .progress-fill{height:100%;border-radius:3px;transition:width 0.5s}
+        .progress-fill.green{background:var(--green)}
+        .progress-fill.yellow{background:var(--yellow)}
+        .progress-fill.red{background:var(--red)}
+        .progress-fill.blue{background:var(--accent)}
+
+        /* ── Responsive ── */
+        @media(max-width:1024px){
+            .summary{grid-template-columns:repeat(3,1fr)}
+            .main{grid-template-columns:1fr}
+            .sidebar{max-height:300px;border-right:none;border-bottom:1px solid var(--border)}
+            .detail{max-height:none}
+        }
+        @media(max-width:640px){
+            .summary{grid-template-columns:1fr 1fr;gap:8px;padding:12px}
+            .summary-card:last-child{grid-column:1/-1}
+            .detail-grid{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ TOPBAR ═══ -->
+<div class="topbar">
+    <div class="topbar-left">
+        <a href="../index.html" class="topbar-logo"><span class="logo-box">AI</span>Vollwerk</a>
+        <div class="topbar-sep"></div>
+        <span class="topbar-title"><i class="fas fa-truck" style="margin-right:6px"></i> Flotten-Dashboard — Schnellweg Logistik GmbH</span>
+    </div>
+    <div class="topbar-right">
+        <span class="topbar-time" id="clock"></span>
+        <a href="index.html" class="topbar-back"><i class="fas fa-arrow-left"></i> Zurück</a>
+    </div>
+</div>
+
+<!-- ═══ SUMMARY STRIP ═══ -->
+<div class="summary" id="summary-strip"></div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-title">Fahrzeuge (21)</span>
+            <div class="sidebar-filter">
+                <button class="filter-btn active" data-filter="all">Alle</button>
+                <button class="filter-btn" data-filter="unterwegs">Unterwegs</button>
+                <button class="filter-btn" data-filter="pause">Pause</button>
+                <button class="filter-btn" data-filter="wartung">Wartung</button>
+                <button class="filter-btn" data-filter="beladen">Beladen</button>
+            </div>
+        </div>
+        <div class="truck-list" id="truck-list"></div>
+    </div>
+    <div class="detail" id="detail-panel">
+        <div class="detail-empty">
+            <i class="fas fa-truck"></i>
+            <p>Wählen Sie ein Fahrzeug aus der Liste,<br>um Details anzuzeigen.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════════════════
+//  MOCK DATA — 21 Trucks
+// ══════════════════════════════════════════════════════════════════════════════
+const CITIES = [
+    "Frankfurt am Main","München","Hamburg","Berlin","Köln","Stuttgart","Düsseldorf",
+    "Leipzig","Hannover","Nürnberg","Bremen","Dresden","Dortmund","Essen","Mannheim",
+    "Kassel","Augsburg","Karlsruhe","Mainz","Wiesbaden","Ulm"
+];
+const DESTINATIONS = [
+    "München","Hamburg","Berlin","Frankfurt am Main","Stuttgart","Köln","Leipzig",
+    "Dresden","Hannover","Bremen","Nürnberg","Düsseldorf","Dortmund","Essen",
+    "Mannheim","Kassel","Augsburg","Karlsruhe","Mainz","Wiesbaden","Ulm"
+];
+const DRIVERS = [
+    "Thomas Müller","Stefan Weber","Klaus Fischer","Hans Schneider","Peter Wagner",
+    "Michael Becker","Andreas Hoffmann","Markus Koch","Jürgen Richter","Frank Braun",
+    "Dieter Krause","Wolfgang Schmitt","Uwe Schwarz","Karl Meier","Helmut Zimmer",
+    "Ralf Herrmann","Bernd König","Horst Wolf","Manfred Huber","Georg Lehmann","Werner Scholz"
+];
+const PLATES = [
+    "F-SL 1001","M-SL 1002","HH-SL 1003","B-SL 1004","K-SL 1005",
+    "S-SL 1006","D-SL 1007","L-SL 1008","H-SL 1009","N-SL 1010",
+    "HB-SL 1011","DD-SL 1012","DO-SL 1013","E-SL 1014","MA-SL 1015",
+    "KS-SL 1016","A-SL 1017","KA-SL 1018","MZ-SL 1019","WI-SL 1020","UL-SL 1021"
+];
+const STATUSES = ["unterwegs","unterwegs","unterwegs","unterwegs","unterwegs","unterwegs","unterwegs","unterwegs","unterwegs","unterwegs","unterwegs","unterwegs","pause","pause","pause","pause","wartung","wartung","beladen","beladen","beladen"];
+const STATUS_LABELS = {unterwegs:"Unterwegs",pause:"Pause",wartung:"Wartung",beladen:"Beladen"};
+
+function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
+function randF(min,max){return +(Math.random()*(max-min)+min).toFixed(1)}
+
+const trucks = [];
+for(let i=0;i<21;i++){
+    const status = STATUSES[i];
+    const speed = status==="unterwegs"?rand(60,92):status==="beladen"?rand(0,5):0;
+    const fuel = rand(15,95);
+    const km = rand(120000,680000);
+    const engineTemp = status==="unterwegs"?rand(82,98):status==="wartung"?rand(40,60):rand(55,78);
+    const oilPressure = randF(2.0,4.5);
+    const tirePressure = [randF(7.5,8.8),randF(7.5,8.8),randF(7.5,8.8),randF(7.5,8.8),randF(7.5,8.8),randF(7.5,8.8)];
+    const batteryV = randF(12.2,14.4);
+    const adblue = rand(20,95);
+    const load = status==="beladen"||status==="unterwegs"?rand(40,100):status==="pause"?rand(0,80):0;
+    const nextService = rand(2000,25000);
+    trucks.push({
+        id: `LKW-${String(i+1).padStart(2,'0')}`,
+        plate: PLATES[i],
+        driver: DRIVERS[i],
+        phone: `+49 1${rand(50,79)} ${rand(1000,9999)} ${rand(100,999)}`,
+        status: status,
+        city: CITIES[i],
+        destination: DESTINATIONS[(i+7)%21],
+        speed: speed,
+        fuel: fuel,
+        km: km,
+        engineTemp: engineTemp,
+        oilPressure: oilPressure,
+        tirePressure: tirePressure,
+        batteryVoltage: batteryV,
+        adblue: adblue,
+        loadPercent: load,
+        cargo: ["Stückgut","Paletten","Kühlware","Schüttgut","Container","Gefahrgut","Textilien","Elektronik","Lebensmittel","Baumaterial"][i%10],
+        weight: randF(8.0,24.0)+" t",
+        nextServiceKm: nextService,
+        lastService: `${rand(1,28)}.0${rand(1,2)}.2026`,
+        truckModel: ["MAN TGX 18.510","Mercedes Actros 1845","Scania R 450","DAF XF 480","Volvo FH 460","Iveco S-Way 490","MAN TGS 18.400","Mercedes Atego 1230","Scania S 500","DAF CF 450"][i%10],
+        yearBuilt: rand(2019,2024),
+        mapX: rand(10,85),
+        mapY: rand(10,85),
+    });
+}
+
+// ── Clock ──
+function updateClock(){
+    const d=new Date();
+    document.getElementById('clock').textContent=d.toLocaleDateString('de-DE',{weekday:'short',day:'2-digit',month:'short',year:'numeric'})+' · '+d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+updateClock();setInterval(updateClock,1000);
+
+// ── Summary strip ──
+function renderSummary(){
+    const counts={total:21,unterwegs:0,pause:0,wartung:0,beladen:0};
+    trucks.forEach(t=>counts[t.status]++);
+    document.getElementById('summary-strip').innerHTML=`
+        <div class="summary-card"><div class="summary-icon blue"><i class="fas fa-truck"></i></div><div><div class="summary-value">${counts.total}</div><div class="summary-label">Fahrzeuge gesamt</div></div></div>
+        <div class="summary-card"><div class="summary-icon green"><i class="fas fa-route"></i></div><div><div class="summary-value">${counts.unterwegs}</div><div class="summary-label">Unterwegs</div></div></div>
+        <div class="summary-card"><div class="summary-icon yellow"><i class="fas fa-pause-circle"></i></div><div><div class="summary-value">${counts.pause}</div><div class="summary-label">Pause</div></div></div>
+        <div class="summary-card"><div class="summary-icon red"><i class="fas fa-tools"></i></div><div><div class="summary-value">${counts.wartung}</div><div class="summary-label">Wartung</div></div></div>
+        <div class="summary-card"><div class="summary-icon orange"><i class="fas fa-boxes"></i></div><div><div class="summary-value">${counts.beladen}</div><div class="summary-label">Wird beladen</div></div></div>
+    `;
+}
+renderSummary();
+
+// ── Truck list ──
+let activeFilter = 'all';
+let activeTruckId = null;
+
+function renderList(){
+    const list = document.getElementById('truck-list');
+    const filtered = activeFilter==='all'?trucks:trucks.filter(t=>t.status===activeFilter);
+    list.innerHTML = filtered.map(t=>`
+        <div class="truck-item ${t.id===activeTruckId?'active':''}" data-id="${t.id}">
+            <div class="truck-status-dot ${t.status}"></div>
+            <div class="truck-info">
+                <div class="truck-name">${t.id} · ${t.plate}</div>
+                <div class="truck-sub">${t.city} → ${t.destination}</div>
+            </div>
+            <div class="truck-speed">${t.speed>0?t.speed+' km/h':'—'}</div>
+        </div>
+    `).join('');
+    list.querySelectorAll('.truck-item').forEach(el=>{
+        el.addEventListener('click',()=>selectTruck(el.dataset.id));
+    });
+}
+renderList();
+
+// ── Filter buttons ──
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter=btn.dataset.filter;
+        renderList();
+    });
+});
+
+// ── Progress bar helper ──
+function progBar(pct,thresholds){
+    let cls='green';
+    if(thresholds==='fuel'){cls=pct<25?'red':pct<50?'yellow':'green';}
+    else if(thresholds==='temp'){cls=pct>95?'red':pct>90?'yellow':'green';}
+    else if(thresholds==='load'){cls=pct>90?'red':pct>70?'yellow':'blue';}
+    return `<div class="progress-bar"><div class="progress-fill ${cls}" style="width:${Math.min(pct,100)}%"></div></div>`;
+}
+
+// ── Select truck → detail panel ──
+function selectTruck(id){
+    activeTruckId=id;
+    renderList();
+    const t=trucks.find(x=>x.id===id);
+    if(!t)return;
+    const panel=document.getElementById('detail-panel');
+    panel.innerHTML=`
+        <div class="detail-header">
+            <div>
+                <div class="detail-truck-id">${t.id} <span style="color:var(--muted);font-weight:400;font-size:1rem">· ${t.plate}</span></div>
+                <div style="color:var(--text2);font-size:0.9rem;margin-top:4px">${t.truckModel} (${t.yearBuilt})</div>
+            </div>
+            <div class="detail-status ${t.status}"><span class="truck-status-dot ${t.status}" style="width:8px;height:8px"></span> ${STATUS_LABELS[t.status]}</div>
+        </div>
+
+        <!-- Map -->
+        <div class="map-placeholder">
+            <div class="map-grid"></div>
+            <div class="map-pin" style="left:${t.mapX}%;top:${t.mapY}%">
+                <i class="fas fa-map-marker-alt"></i>
+                <span class="map-pin-label">${t.city}</span>
+            </div>
+            <div class="map-pin" style="left:${(t.mapX+35)%90+5}%;top:${(t.mapY+25)%80+10}%;opacity:0.5">
+                <i class="fas fa-flag-checkered" style="font-size:1rem;color:var(--green)"></i>
+                <span class="map-pin-label">${t.destination}</span>
+            </div>
+        </div>
+
+        <div class="detail-grid">
+            <!-- Standort & Route -->
+            <div class="detail-card">
+                <div class="detail-card-title"><i class="fas fa-map-marker-alt"></i> Standort & Route</div>
+                <div class="detail-row"><span class="detail-row-label">Aktueller Standort</span><span class="detail-row-value">${t.city}</span></div>
+                <div class="detail-row"><span class="detail-row-label">Zielort</span><span class="detail-row-value">${t.destination}</span></div>
+                <div class="detail-row"><span class="detail-row-label">Geschwindigkeit</span><span class="detail-row-value">${t.speed} km/h</span></div>
+                <div class="detail-row"><span class="detail-row-label">Kilometerstand</span><span class="detail-row-value">${t.km.toLocaleString('de-DE')} km</span></div>
+            </div>
+
+            <!-- Fahrer -->
+            <div class="detail-card">
+                <div class="detail-card-title"><i class="fas fa-user"></i> Fahrer</div>
+                <div class="detail-row"><span class="detail-row-label">Name</span><span class="detail-row-value">${t.driver}</span></div>
+                <div class="detail-row"><span class="detail-row-label">Telefon</span><span class="detail-row-value">${t.phone}</span></div>
+                <div class="detail-row"><span class="detail-row-label">Status</span><span class="detail-row-value">${STATUS_LABELS[t.status]}</span></div>
+                <div class="detail-row"><span class="detail-row-label">Schichtbeginn</span><span class="detail-row-value">${rand(4,8)}:00 Uhr</span></div>
+            </div>
+
+            <!-- Motor & Antrieb -->
+            <div class="detail-card">
+                <div class="detail-card-title"><i class="fas fa-cog"></i> Motor & Antrieb</div>
+                <div class="detail-row"><span class="detail-row-label">Motortemperatur</span><span class="detail-row-value" style="color:${t.engineTemp>95?'var(--red)':t.engineTemp>90?'var(--yellow)':'var(--green)'}">${t.engineTemp}°C</span></div>
+                ${progBar(t.engineTemp,'temp')}
+                <div class="detail-row" style="margin-top:8px"><span class="detail-row-label">Öldruck</span><span class="detail-row-value">${t.oilPressure} bar</span></div>
+                <div class="detail-row"><span class="detail-row-label">Batteriespannung</span><span class="detail-row-value">${t.batteryVoltage} V</span></div>
+                <div class="detail-row"><span class="detail-row-label">AdBlue-Füllstand</span><span class="detail-row-value">${t.adblue}%</span></div>
+            </div>
+
+            <!-- Kraftstoff -->
+            <div class="detail-card">
+                <div class="detail-card-title"><i class="fas fa-gas-pump"></i> Kraftstoff</div>
+                <div class="detail-row"><span class="detail-row-label">Tankfüllung</span><span class="detail-row-value" style="color:${t.fuel<25?'var(--red)':t.fuel<50?'var(--yellow)':'var(--green)'}">${t.fuel}%</span></div>
+                ${progBar(t.fuel,'fuel')}
+                <div class="detail-row" style="margin-top:8px"><span class="detail-row-label">Reichweite (ca.)</span><span class="detail-row-value">${Math.round(t.fuel*8)} km</span></div>
+                <div class="detail-row"><span class="detail-row-label">Verbrauch Ø</span><span class="detail-row-value">${randF(28,36)} L/100km</span></div>
+            </div>
+
+            <!-- Reifen -->
+            <div class="detail-card full">
+                <div class="detail-card-title"><i class="fas fa-circle-notch"></i> Reifendruck (bar)</div>
+                <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:8px">
+                    ${t.tirePressure.map((p,i)=>{
+                        const pos = ['VL','VR','ML','MR','HL','HR'][i];
+                        const ok = p >= 7.8 && p <= 8.5;
+                        return `<div style="text-align:center;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 6px">
+                            <div style="font-size:0.7rem;color:var(--muted);margin-bottom:4px">${pos}</div>
+                            <div style="font-size:1.1rem;font-weight:700;color:${ok?'var(--green)':'var(--yellow)'}">${p}</div>
+                        </div>`;
+                    }).join('')}
+                </div>
+            </div>
+
+            <!-- Ladung -->
+            <div class="detail-card">
+                <div class="detail-card-title"><i class="fas fa-box"></i> Ladung</div>
+                <div class="detail-row"><span class="detail-row-label">Ladungsart</span><span class="detail-row-value">${t.cargo}</span></div>
+                <div class="detail-row"><span class="detail-row-label">Gewicht</span><span class="detail-row-value">${t.weight}</span></div>
+                <div class="detail-row"><span class="detail-row-label">Auslastung</span><span class="detail-row-value">${t.loadPercent}%</span></div>
+                ${progBar(t.loadPercent,'load')}
+            </div>
+
+            <!-- Wartung -->
+            <div class="detail-card">
+                <div class="detail-card-title"><i class="fas fa-wrench"></i> Wartung</div>
+                <div class="detail-row"><span class="detail-row-label">Nächste Wartung in</span><span class="detail-row-value" style="color:${t.nextServiceKm<5000?'var(--yellow)':'var(--text)'}">${t.nextServiceKm.toLocaleString('de-DE')} km</span></div>
+                <div class="detail-row"><span class="detail-row-label">Letzte Wartung</span><span class="detail-row-value">${t.lastService}</span></div>
+                <div class="detail-row"><span class="detail-row-label">TÜV bis</span><span class="detail-row-value">${rand(3,12)}/2027</span></div>
+            </div>
+        </div>
+    `;
+}
+</script>
+</body>
+</html>

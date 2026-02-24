@@ -239,6 +239,24 @@
         .blog-card-meta { display: flex; gap: 16px; color: var(--muted); font-size: 0.8rem; }
         .blog-card-meta span { display: flex; align-items: center; gap: 6px; }
         .section-footer { text-align: center; margin-top: 40px; }
+
+        /* ── Use Cases ── */
+        .usecases{padding:80px 0;background:var(--bg)}
+        .usecases-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px}
+        .usecase-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px;text-decoration:none;color:var(--text);position:relative;overflow:hidden;transition:all 0.3s;box-shadow:0 4px 20px rgba(0,0,0,0.06);display:flex;flex-direction:column;gap:12px}
+        .usecase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--warm),var(--dark));opacity:0;transition:opacity 0.3s}
+        .usecase-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,0.12)}
+        .usecase-card:hover::before{opacity:1}
+        .usecase-icon{width:56px;height:56px;background:linear-gradient(135deg,var(--warm),var(--dark));border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:white}
+        .usecase-badge{display:inline-flex;align-self:flex-start;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);color:#16a34a;padding:4px 12px;border-radius:50px;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
+        .usecase-title{font-size:1.2rem;font-weight:700;line-height:1.3}
+        .usecase-desc{color:var(--text2);font-size:0.95rem;line-height:1.7}
+        .usecase-meta{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:0.8rem}
+        .usecase-meta span{display:flex;align-items:center;gap:6px}
+        .usecase-cta{display:inline-flex;align-items:center;gap:8px;color:var(--warm);font-weight:600;font-size:0.95rem;margin-top:auto;padding-top:8px}
+        .usecase-cta i{transition:transform 0.2s}
+        .usecase-card:hover .usecase-cta i{transform:translateX(4px)}
+
         @media (max-width: 1024px) {
             .blog-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -278,7 +296,7 @@
     </style>
 </head>
 <body>
-    <nav><div class="nav-inner"><a href="/" class="logo"><span class="logo-box">AI</span>Vollwerk</a><ul class="nav-links"><li><a href="#services"><span data-lang="en">Services</span><span data-lang="de">Leistungen</span></a></li><li><a href="#process"><span data-lang="en">Process</span><span data-lang="de">Ablauf</span></a></li><li><a href="#about"><span data-lang="en">About</span><span data-lang="de">Über mich</span></a></li><li><a href="blog/"><span data-lang="en">Blog</span><span data-lang="de">Blog</span></a></li><li><button class="lang-switch" onclick="toggleLang()"><span data-lang="en">DE</span><span data-lang="de">EN</span></button></li><li><a href="https://calendly.com/elmadbouh/30min" class="nav-cta"><span data-lang="en">Book a Free Call</span><span data-lang="de">Kostenloses Gespräch</span></a></li></ul><button class="mobile-toggle"></button></div></nav>
+    <nav><div class="nav-inner"><a href="/" class="logo"><span class="logo-box">AI</span>Vollwerk</a><ul class="nav-links"><li><a href="#services"><span data-lang="en">Services</span><span data-lang="de">Leistungen</span></a></li><li><a href="#process"><span data-lang="en">Process</span><span data-lang="de">Ablauf</span></a></li><li><a href="#about"><span data-lang="en">About</span><span data-lang="de">Über mich</span></a></li><li><a href="#usecases"><span data-lang="en">Use Cases</span><span data-lang="de">Use Cases</span></a></li><li><a href="blog/"><span data-lang="en">Blog</span><span data-lang="de">Blog</span></a></li><li><button class="lang-switch" onclick="toggleLang()"><span data-lang="en">DE</span><span data-lang="de">EN</span></button></li><li><a href="https://calendly.com/elmadbouh/30min" class="nav-cta"><span data-lang="en">Book a Free Call</span><span data-lang="de">Kostenloses Gespräch</span></a></li></ul><button class="mobile-toggle"></button></div></nav>
 
 
 
@@ -351,6 +369,20 @@
             </div>
             <div class="section-footer">
                 <a href="blog/" class="btn btn-secondary">View All Posts</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ USE CASES ═══ -->
+    <section class="usecases" id="usecases">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag"><span data-lang="en">Use Cases</span><span data-lang="de">Anwendungsfälle</span></span>
+                <h2 class="section-title"><span data-lang="en">AI in Action</span><span data-lang="de">KI in der Praxis</span></h2>
+                <p class="section-desc"><span data-lang="en">Discover how AI-powered dashboards and automation transform real businesses.</span><span data-lang="de">Entdecken Sie, wie KI-gestützte Dashboards und Automatisierung reale Unternehmen transformieren.</span></p>
+            </div>
+            <div style="text-align:center">
+                <a href="usecases/" class="btn btn-primary"><i class="fas fa-th-large"></i> <span data-lang="en">View Use Cases</span><span data-lang="de">Anwendungsfälle ansehen</span></a>
             </div>
         </div>
     </section>

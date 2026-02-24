@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anwendungsfälle — KI in der Praxis | Vollwerk</title>
+    <meta name="description" content="Entdecken Sie praktische KI-Anwendungsfälle: Dashboards, Automatisierung und intelligente Lösungen für reale Unternehmen.">
+    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/fontawesome-all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--bg:#f8f6f3;--bg2:#ffffff;--card:#ffffff;--accent:#f0ebe4;--border:#e8e4de;--text:#1a1a1a;--text2:#4a4a4a;--muted:#7a7a7a;--warm:#8b7355;--dark:#5c4d3d}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+        .container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+        /* ── Nav ── */
+        nav{background:rgba(248,246,243,0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:16px 24px;position:sticky;top:0;z-index:100}
+        .nav-inner{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:700}
+        .logo-box{width:36px;height:36px;background:linear-gradient(135deg,var(--warm),var(--dark));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:800;color:white}
+        .nav-back{display:inline-flex;align-items:center;gap:6px;color:var(--text2);text-decoration:none;font-size:0.9rem;font-weight:500;padding:8px 16px;border-radius:8px;border:1px solid var(--border);transition:all 0.2s}
+        .nav-back:hover{background:var(--card);color:var(--text)}
+
+        /* ── Page header ── */
+        .page-header{padding:80px 0 40px;text-align:center}
+        .page-tag{display:inline-block;background:var(--accent);border:1px solid var(--border);padding:6px 14px;border-radius:50px;font-size:0.8rem;color:var(--warm);margin-bottom:16px;text-transform:uppercase;letter-spacing:0.05em;font-weight:600}
+        .page-title{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;margin-bottom:16px}
+        .gradient-text{background:linear-gradient(135deg,var(--warm),var(--dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .page-desc{color:var(--text2);font-size:1.05rem;max-width:600px;margin:0 auto}
+
+        /* ── Use case cards grid ── */
+        .usecases-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;padding-bottom:80px}
+        .usecase-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px;text-decoration:none;color:var(--text);position:relative;overflow:hidden;transition:all 0.3s;box-shadow:0 4px 20px rgba(0,0,0,0.06);display:flex;flex-direction:column;gap:12px}
+        .usecase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--warm),var(--dark));opacity:0;transition:opacity 0.3s}
+        .usecase-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,0.12)}
+        .usecase-card:hover::before{opacity:1}
+        .usecase-icon{width:56px;height:56px;background:linear-gradient(135deg,var(--warm),var(--dark));border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:white}
+        .usecase-badge{display:inline-flex;align-self:flex-start;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);color:#16a34a;padding:4px 12px;border-radius:50px;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
+        .usecase-title{font-size:1.2rem;font-weight:700;line-height:1.3}
+        .usecase-desc{color:var(--text2);font-size:0.95rem;line-height:1.7}
+        .usecase-meta{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:0.8rem}
+        .usecase-meta span{display:flex;align-items:center;gap:6px}
+        .usecase-cta{display:inline-flex;align-items:center;gap:8px;color:var(--warm);font-weight:600;font-size:0.95rem;margin-top:auto;padding-top:8px}
+        .usecase-cta i{transition:transform 0.2s}
+        .usecase-card:hover .usecase-cta i{transform:translateX(4px)}
+
+        /* ── Footer ── */
+        footer{padding:32px 0;border-top:1px solid var(--border);text-align:center}
+        .footer-copy{color:var(--muted);font-size:0.85rem}
+        .footer-copy a{color:var(--warm);text-decoration:none}
+
+        @media(max-width:768px){
+            .usecases-grid{grid-template-columns:1fr}
+            .page-header{padding:60px 0 30px}
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../index.html" class="logo"><span class="logo-box">AI</span>Vollwerk</a>
+        <a href="../index.html" class="nav-back"><i class="fas fa-arrow-left"></i> Zurück zur Startseite</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="page-header">
+        <span class="page-tag">Anwendungsfälle</span>
+        <h1 class="page-title"><span class="gradient-text">KI in der Praxis</span></h1>
+        <p class="page-desc">Entdecken Sie, wie KI-gestützte Dashboards und Automatisierung reale Unternehmen transformieren.</p>
+    </div>
+
+    <div class="usecases-grid">
+
+        <!-- ── Transport Dashboard ── -->
+        <a href="transport-dashboard.html" class="usecase-card">
+            <div class="usecase-icon"><i class="fas fa-truck"></i></div>
+            <div class="usecase-badge">Live-Demo</div>
+            <h3 class="usecase-title">Transportunternehmen — Tracking Dashboard</h3>
+            <p class="usecase-desc">Echtzeit-Flottenüberwachung für 21 LKW mit GPS-Tracking, Fahrzeugdiagnose und Fahrerstatus — vollautomatisiert.</p>
+            <div class="usecase-meta">
+                <span><i class="fas fa-map-marker-alt"></i> Live-Tracking</span>
+                <span><i class="fas fa-tachometer-alt"></i> Fahrzeugdaten</span>
+                <span><i class="fas fa-chart-line"></i> Analysen</span>
+            </div>
+            <div class="usecase-cta">Dashboard öffnen <i class="fas fa-arrow-right"></i></div>
+        </a>
+
+        <!-- Future use cases go here -->
+
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p class="footer-copy">&copy; 2026 Adil El Madbouh · <a href="../index.html">vollwerk.de</a></p>
+    </div>
+</footer>
+
+</body>
+</html>
