@@ -35,11 +35,11 @@
     <meta name="geo.placename" content="Kronberg im Taunus">
     <meta name="geo.position" content="50.1821;8.5189">
     <meta name="ICBM" content="50.1821, 8.5189">
-    <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
-    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
     <meta name="theme-color" content="#8b7355">
     <script type="application/ld+json">
     {
@@ -49,7 +49,12 @@
         "alternateName": ["Vollwerk AI Solutions", "AI Consultant Deutschland", "AI Delivery Manager Germany"],
         "description": "AI Consultant & Delivery Manager in Deutschland. Sichere Implementation von KI-Projekten for mittelständische Unternehmen. Lokal oder Cloud.",
         "url": "https://www.vollwerk.de",
-        "logo": "https://www.vollwerk.de/images/favicon-32x32.png",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.vollwerk.de/images/favicon/web-app-manifest-512x512.png",
+            "width": 512,
+            "height": 512
+        },
         "image": "https://www.vollwerk.de/images/IMG_1225.JPEG",
         "telephone": "+49 176 6343 1659",
         "email": "adil@vollwerk.de",
@@ -86,6 +91,63 @@
         "sameAs": [
             "https://www.linkedin.com/in/elmadbouh",
             "https://github.com/elmadbouh"
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Vollwerk",
+        "alternateName": "Vollwerk - AI Consultant & Delivery Manager",
+        "url": "https://www.vollwerk.de",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.vollwerk.de/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "SiteNavigationElement",
+                "name": "Leistungen",
+                "description": "KI-Assistent Setup, AI Agent Installation, KI Automatisierung und AI Consulting",
+                "url": "https://www.vollwerk.de/#services"
+            },
+            {
+                "@type": "SiteNavigationElement",
+                "name": "Ablauf",
+                "description": "So läuft ein KI-Projekt mit Vollwerk ab — von der Erstberatung bis zur Implementierung",
+                "url": "https://www.vollwerk.de/#process"
+            },
+            {
+                "@type": "SiteNavigationElement",
+                "name": "Über mich",
+                "description": "Adil El Madbouh — AI Consultant & Delivery Manager aus Kronberg im Taunus",
+                "url": "https://www.vollwerk.de/#about"
+            },
+            {
+                "@type": "SiteNavigationElement",
+                "name": "Use Cases",
+                "description": "Praxisbeispiele und Anwendungsfälle für KI in mittelständischen Unternehmen",
+                "url": "https://www.vollwerk.de/usecases/"
+            },
+            {
+                "@type": "SiteNavigationElement",
+                "name": "Blog",
+                "description": "Fachartikel zu KI-Assistenten, AI Agents, Sicherheit und Automatisierung",
+                "url": "https://www.vollwerk.de/blog/"
+            },
+            {
+                "@type": "SiteNavigationElement",
+                "name": "Kontakt",
+                "description": "Kostenloses Erstgespräch buchen — 30 Minuten unverbindliche KI-Beratung",
+                "url": "https://calendly.com/elmadbouh/30min"
+            }
         ]
     }
     </script>
