@@ -267,9 +267,73 @@
             color: var(--warm)
         }
 
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            line-height: 1;
+            z-index: 101
+        }
+
         @media(max-width:768px) {
             .nav-links {
-                display: none
+                display: none;
+                flex-direction: column;
+                position: fixed;
+                top: 68px;
+                left: 0;
+                right: 0;
+                background: rgba(248, 246, 243, 0.98);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                padding: 24px;
+                gap: 8px;
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+                z-index: 99;
+                animation: slideDown 0.25s ease-out
+            }
+
+            .nav-links.open {
+                display: flex
+            }
+
+            .nav-links li {
+                width: 100%
+            }
+
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding: 12px 16px;
+                border-radius: 10px;
+                font-size: 1rem;
+                text-align: left
+            }
+
+            .nav-links .nav-cta {
+                text-align: center;
+                margin-top: 8px
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px)
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0)
+                }
+            }
+
+            .mobile-toggle {
+                display: block
             }
 
             .blog-card {
@@ -301,6 +365,7 @@
                 <li><a href="/#about">Über mich</a></li>
                 <li><a href="https://calendly.com/elmadbouh/30min" class="nav-cta">Kostenloses Gespräch</a></li>
             </ul>
+            <button class="mobile-toggle" aria-label="Menü öffnen" onclick="toggleMobileMenu()">☰</button>
         </div>
     </nav>
 
@@ -405,5 +470,10 @@
         </div>
     </footer>
 </body>
+
+<script>
+    function toggleMobileMenu() { const n = document.querySelector('.nav-links'), b = document.querySelector('.mobile-toggle'); const o = n.classList.toggle('open'); b.textContent = o ? '✕' : '☰'; b.setAttribute('aria-label', o ? 'Menü schließen' : 'Menü öffnen') }
+    document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => { const n = document.querySelector('.nav-links'), b = document.querySelector('.mobile-toggle'); if (n.classList.contains('open')) { n.classList.remove('open'); b.textContent = '☰' } }))
+</script>
 
 </html>
