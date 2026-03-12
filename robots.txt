@@ -1,7 +1,8 @@
 # Robots.txt for vollwerk.de
 User-agent: *
 Allow: /
-Disallow: /assets/
-Disallow: /images/
 
-Sitemap: https://www.vollwerk.de/sitemap.xml
+# Block only non-essential assets (CSS/JS/SASS)
+Disallow: /assets/sass/
+
+Sitemap: https://vollwerk.de/sitemap.xml

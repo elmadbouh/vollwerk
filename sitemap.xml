@@ -1,71 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://www.vollwerk.de/</loc>
-        <xhtml:link rel="alternate" hreflang="de" href="https://www.vollwerk.de/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://www.vollwerk.de/?lang=en"/>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.vollwerk.de/"/>
+        <loc>https://vollwerk.de/</loc>
         <lastmod>2026-03-07</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://www.vollwerk.de/blog/</loc>
+        <loc>https://vollwerk.de/blog/</loc>
         <lastmod>2026-03-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.vollwerk.de/usecases/</loc>
+        <loc>https://vollwerk.de/usecases/</loc>
         <lastmod>2026-03-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://www.vollwerk.de/blog/was-ist-ein-ki-assistent.html</loc>
+        <loc>https://vollwerk.de/blog/was-ist-ein-ki-assistent.html</loc>
         <lastmod>2026-02-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://www.vollwerk.de/blog/openclaw-sicher-betreiben-ki-sicherheit.html</loc>
+        <loc>https://vollwerk.de/blog/openclaw-sicher-betreiben-ki-sicherheit.html</loc>
         <lastmod>2026-02-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://www.vollwerk.de/blog/ki-fuer-selbststaendige-10-beispiele.html</loc>
+        <loc>https://vollwerk.de/blog/ki-fuer-selbststaendige-10-beispiele.html</loc>
         <lastmod>2026-02-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://www.vollwerk.de/blog/chatgpt-vs-lokale-ki-sicherheit.html</loc>
+        <loc>https://vollwerk.de/blog/chatgpt-vs-lokale-ki-sicherheit.html</loc>
         <lastmod>2026-02-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://www.vollwerk.de/blog/agenten-gedaechtnis-postgres-vector-mcp.html</loc>
+        <loc>https://vollwerk.de/blog/agenten-gedaechtnis-postgres-vector-mcp.html</loc>
         <lastmod>2026-03-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://www.vollwerk.de/usecases/transport-dashboard.html</loc>
+        <loc>https://vollwerk.de/usecases/transport-dashboard.html</loc>
         <lastmod>2026-03-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://www.vollwerk.de/impressum.html</loc>
+        <loc>https://vollwerk.de/impressum.html</loc>
         <lastmod>2026-02-16</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
-        <loc>https://www.vollwerk.de/datenschutz.html</loc>
+        <loc>https://vollwerk.de/datenschutz.html</loc>
         <lastmod>2026-02-16</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
