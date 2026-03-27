@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code /dream: Memory 2.0 – Wie KI-Agenten im Schlaf dazulernen | Vollwerk</title>
+    <meta name="description"
+        content="Claude Code hat ein verstecktes Feature: /dream analysiert Ihre Codebasis autonom im Hintergrund und baut ein tiefes Projektgedächtnis auf. Warum das ein Gamechanger für KI-gestützte Entwicklung ist.">
+    <meta name="keywords"
+        content="Claude Code dream, Claude Code Memory, CLAUDE.md, Auto Memory, KI Agent Gedächtnis, Claude Code Features, Anthropic, KI Entwicklung, AI Coding Agent, Memory 2.0">
+    <meta name="author" content="Adil El Madbouh">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vollwerk.de/blog/claude-code-dream-memory.html">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://vollwerk.de/blog/claude-code-dream-memory.html">
+    <meta property="og:title" content="Claude Code /dream: Memory 2.0 – Wie KI-Agenten im Schlaf dazulernen">
+    <meta property="og:description"
+        content="Das versteckte /dream-Feature in Claude Code analysiert Ihre Codebasis autonom und baut ein tiefes Projektgedächtnis auf. Ein Gamechanger für KI-gestützte Entwicklung.">
+    <meta property="og:image" content="https://vollwerk.de/images/blog/claude-code-dream.png">
+    <meta property="og:locale" content="de_DE">
+    <meta property="article:published_time" content="2026-03-27">
+    <meta property="article:author" content="Adil El Madbouh">
+    <link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/fontawesome-all.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q19XBLL0K5"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-Q19XBLL0K5');</script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Claude Code /dream: Memory 2.0 – Wie KI-Agenten im Schlaf dazulernen",
+        "description": "Claude Code hat ein verstecktes Feature: /dream analysiert Ihre Codebasis autonom im Hintergrund und baut ein tiefes Projektgedächtnis auf.",
+        "image": "https://vollwerk.de/images/blog/claude-code-dream.png",
+        "author": {
+            "@type": "Person",
+            "name": "Adil El Madbouh",
+            "url": "https://www.linkedin.com/in/elmadbouh"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Vollwerk - KI-Projekte",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://vollwerk.de/images/favicon-32x32.png"
+            }
+        },
+        "datePublished": "2026-03-27",
+        "dateModified": "2026-03-27"
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --bg: #f8f6f3;
+            --bg2: #ffffff;
+            --card: #ffffff;
+            --accent: #f0ebe4;
+            --border: #e8e4de;
+            --text: #1a1a1a;
+            --text2: #4a4a4a;
+            --muted: #7a7a7a;
+            --warm: #8b7355;
+            --dark: #5c4d3d;
+            --green: #22c55e;
+            --red: #ef4444
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(248, 246, 243, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border)
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            max-width: 1200px;
+            margin: 0 auto
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700
+        }
+
+        .logo-box {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--warm), var(--dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: white
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none
+        }
+
+        .nav-links a {
+            color: var(--text2);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s
+        }
+
+        .nav-links a:hover {
+            color: var(--text)
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--warm), var(--dark));
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: white !important
+        }
+
+        .lang-switch {
+            background: var(--accent);
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text2);
+            transition: all 0.2s
+        }
+
+        .lang-switch:hover {
+            background: var(--border)
+        }
+
+        article {
+            padding: 120px 0 60px
+        }
+
+        .breadcrumb {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 24px
+        }
+
+        .breadcrumb a {
+            color: var(--warm);
+            text-decoration: none
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px
+        }
+
+        .meta {
+            display: flex;
+            gap: 16px;
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 32px;
+            flex-wrap: wrap
+        }
+
+        .meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .hero-image {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08)
+        }
+
+        .hero-image img {
+            width: 100%;
+            display: block
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 48px 0 16px;
+            color: var(--text)
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 32px 0 12px;
+            color: var(--text)
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: var(--text2)
+        }
+
+        ul,
+        ol {
+            margin: 0 0 24px 24px;
+            color: var(--text2)
+        }
+
+        li {
+            margin-bottom: 8px
+        }
+
+        strong {
+            color: var(--text)
+        }
+
+        code {
+            background: var(--accent);
+            border: 1px solid var(--border);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: var(--warm)
+        }
+
+        pre {
+            background: #1a1a2e;
+            color: #e8e8e8;
+            padding: 24px;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 24px 0;
+            font-size: 0.9rem;
+            line-height: 1.6
+        }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: inherit
+        }
+
+        .highlight-box {
+            background: var(--accent);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0
+        }
+
+        .highlight-box h4 {
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--warm)
+        }
+
+        .highlight-box p {
+            margin-bottom: 0
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 24px 0
+        }
+
+        .comparison-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px
+        }
+
+        .comparison-card h4 {
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .comparison-card ul {
+            margin: 0;
+            padding-left: 20px
+        }
+
+        .architecture-box {
+            background: linear-gradient(135deg, #1a1a2e, #2d2d44);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 32px 0;
+            color: white;
+            text-align: center
+        }
+
+        .architecture-box h4 {
+            color: #e8c547;
+            font-size: 1.1rem;
+            margin-bottom: 20px
+        }
+
+        .arch-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 0.95rem
+        }
+
+        .arch-node {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 600
+        }
+
+        .arch-node.highlight {
+            background: linear-gradient(135deg, var(--warm), var(--dark));
+            border-color: var(--warm)
+        }
+
+        .arch-arrow {
+            font-size: 1.2rem;
+            color: #e8c547
+        }
+
+        .video-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 32px 0;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08)
+        }
+
+        .video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, var(--warm), var(--dark));
+            color: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin: 48px 0;
+            text-align: center
+        }
+
+        .cta-box h3 {
+            color: white;
+            margin: 0 0 12px
+        }
+
+        .cta-box p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--dark)
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2)
+        }
+
+        footer {
+            padding: 48px 0 24px;
+            background: var(--bg2);
+            border-top: 1px solid var(--border)
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px
+        }
+
+        .footer-copy {
+            color: var(--muted);
+            font-size: 0.85rem
+        }
+
+        .footer-links a {
+            color: var(--text2);
+            text-decoration: none;
+            margin-left: 24px;
+            font-size: 0.9rem
+        }
+
+        .footer-links a:hover {
+            color: var(--warm)
+        }
+
+        [data-lang="en"] {
+            display: none
+        }
+
+        body.en [data-lang="de"] {
+            display: none
+        }
+
+        body.en [data-lang="en"] {
+            display: block
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            line-height: 1;
+            z-index: 101
+        }
+
+        @media(max-width:768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: fixed;
+                top: 68px;
+                left: 0;
+                right: 0;
+                background: rgba(248, 246, 243, 0.98);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                padding: 24px;
+                gap: 8px;
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+                z-index: 99;
+                animation: slideDown 0.25s ease-out
+            }
+
+            .nav-links.open {
+                display: flex
+            }
+
+            .nav-links li {
+                width: 100%
+            }
+
+            .nav-links a,
+            .nav-links button {
+                display: block;
+                width: 100%;
+                padding: 12px 16px;
+                border-radius: 10px;
+                font-size: 1rem;
+                text-align: left
+            }
+
+            .nav-links .nav-cta {
+                text-align: center;
+                margin-top: 8px
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px)
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0)
+                }
+            }
+
+            .mobile-toggle {
+                display: block
+            }
+
+            h1 {
+                font-size: 1.8rem
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center
+            }
+
+            .footer-links a {
+                margin: 0 12px
+            }
+        }
+    </style>
+</head>
+
+<body class="de">
+    <nav>
+        <div class="nav-inner"><a href="../" class="logo"><span class="logo-box">AI</span>Vollwerk</a>
+            <ul class="nav-links">
+                <li><a href="../#services"><span data-lang="en">Services</span><span
+                            data-lang="de">Leistungen</span></a></li>
+                <li><a href="../blog/"><span data-lang="en">Blog</span><span data-lang="de">Blog</span></a></li>
+                <li><a href="../team/"><span data-lang="en">Team</span><span data-lang="de">Team</span></a></li>
+                <li><button class="lang-switch" onclick="toggleLang()"><span data-lang="en">DE</span><span
+                            data-lang="de">EN</span></button></li>
+                <li><a href="https://calendly.com/elmadbouh/30min" class="nav-cta"><span data-lang="en">Book
+                            Call</span><span data-lang="de">Gespräch buchen</span></a></li>
+            </ul><button class="mobile-toggle" aria-label="Menü öffnen" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </nav>
+
+    <article>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/">Home</a> / <a href="/blog/">Blog</a> / <span data-lang="de">Claude Code /dream</span><span
+                    data-lang="en">Claude Code /dream</span>
+            </div>
+
+            <h1>
+                <span data-lang="de">Claude Code <code>/dream</code>: Memory 2.0 – Wie KI-Agenten im Schlaf dazulernen</span>
+                <span data-lang="en">Claude Code <code>/dream</code>: Memory 2.0 – How AI Agents Learn While You Sleep</span>
+            </h1>
+
+            <div class="meta">
+                <span><i class="fas fa-user"></i> Adil El Madbouh</span>
+                <span><i class="fas fa-calendar"></i> 27. März 2026</span>
+                <span><i class="fas fa-clock"></i> 10 Min. Lesezeit</span>
+            </div>
+
+            <div class="hero-image">
+                <img src="../images/blog/claude-code-dream.png"
+                    alt="Claude Code /dream Feature – Memory 2.0 für KI-Agenten">
+            </div>
+
+            <p>
+                <strong><span data-lang="de">Stellen Sie sich vor, Ihr KI-Agent analysiert Ihre gesamte Codebasis über Nacht – autonom, im Hintergrund – und hat am Morgen ein tiefes Verständnis Ihres Projekts aufgebaut.</span></strong>
+                <strong><span data-lang="en">Imagine your AI agent analyzes your entire codebase overnight – autonomously, in the background – and has built a deep understanding of your project by morning.</span></strong>
+            </p>
+
+            <p>
+                <span data-lang="de">Genau das leistet das <code>/dream</code>-Feature in Claude Code. Es ist Anthropics Antwort auf eines der hartnäckigsten Probleme beim Arbeiten mit KI-Agenten: <strong>den Kontextverlust zwischen Sessions.</strong> Und es verändert grundlegend, wie wir mit Coding-Agenten arbeiten.</span>
+                <span data-lang="en">That's exactly what the <code>/dream</code> feature in Claude Code does. It's Anthropic's answer to one of the most persistent problems when working with AI agents: <strong>losing context between sessions.</strong> And it fundamentally changes how we work with coding agents.</span>
+            </p>
+
+            <h2><span data-lang="de">Das Problem: Jede Session startet bei Null</span><span data-lang="en">The Problem: Every Session Starts From Scratch</span></h2>
+
+            <p>
+                <span data-lang="de">Wenn Sie regelmäßig mit Claude Code, GitHub Copilot oder anderen KI-Coding-Agenten arbeiten, kennen Sie das: Jede neue Konversation beginnt ohne Kontext. Der Agent muss sich erst in Ihr Projekt einlesen, bevor er produktiv mitarbeiten kann. Build-Befehle, Projektarchitektur, Coding-Konventionen – alles muss jedes Mal neu entdeckt oder erklärt werden.</span>
+                <span data-lang="en">If you regularly work with Claude Code, GitHub Copilot, or other AI coding agents, you know this: every new conversation starts without context. The agent has to read into your project first before it can contribute productively. Build commands, project architecture, coding conventions – everything needs to be rediscovered or explained each time.</span>
+            </p>
+
+            <p>
+                <span data-lang="de">Bisher gab es zwei Ansätze, um das zu lösen:</span>
+                <span data-lang="en">Until now, there were two approaches to solve this:</span>
+            </p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h4>📝 CLAUDE.md</h4>
+                    <p style="color: var(--text2); font-size: 0.9rem; margin-bottom: 12px;">
+                        <span data-lang="de"><strong>Sie</strong> schreiben Anweisungen manuell in eine Datei, die Claude bei jeder Session liest.</span>
+                        <span data-lang="en"><strong>You</strong> write instructions manually into a file that Claude reads at every session.</span>
+                    </p>
+                    <ul style="font-size: 0.85rem;">
+                        <li><span data-lang="de">Projektstruktur & Build-Befehle</span><span data-lang="en">Project structure & build commands</span></li>
+                        <li><span data-lang="de">Coding-Standards & Konventionen</span><span data-lang="en">Coding standards & conventions</span></li>
+                        <li><span data-lang="de">Architektur-Entscheidungen</span><span data-lang="en">Architecture decisions</span></li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <h4>🧠 Auto Memory</h4>
+                    <p style="color: var(--text2); font-size: 0.9rem; margin-bottom: 12px;">
+                        <span data-lang="de"><strong>Claude</strong> speichert automatisch Gelerntes aus Ihren Korrekturen und Interaktionen.</span>
+                        <span data-lang="en"><strong>Claude</strong> automatically saves learnings from your corrections and interactions.</span>
+                    </p>
+                    <ul style="font-size: 0.85rem;">
+                        <li><span data-lang="de">Debugging-Patterns</span><span data-lang="en">Debugging patterns</span></li>
+                        <li><span data-lang="de">Ihre Präferenzen</span><span data-lang="en">Your preferences</span></li>
+                        <li><span data-lang="de">Workflow-Gewohnheiten</span><span data-lang="en">Workflow habits</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <p>
+                <span data-lang="de">Beide Ansätze haben eine Einschränkung: Sie sammeln Wissen nur <strong>inkrementell</strong>, Stück für Stück, während Sie arbeiten. Das CLAUDE.md müssen Sie selbst pflegen. Auto Memory speichert nur, was in Gesprächen auffällt. Keiner der beiden Ansätze führt eine <strong>tiefe, systematische Analyse</strong> Ihres gesamten Projekts durch.</span>
+                <span data-lang="en">Both approaches have a limitation: they only accumulate knowledge <strong>incrementally</strong>, piece by piece, while you work. You have to maintain CLAUDE.md yourself. Auto Memory only saves what stands out in conversations. Neither approach performs a <strong>deep, systematic analysis</strong> of your entire project.</span>
+            </p>
+
+            <h2><span data-lang="de">Die Lösung: <code>/dream</code> – Claude analysiert Ihr Projekt autonom</span><span data-lang="en">The Solution: <code>/dream</code> – Claude Analyzes Your Project Autonomously</span></h2>
+
+            <p>
+                <span data-lang="de">Der <code>/dream</code>-Befehl in Claude Code löst genau dieses Problem. Wenn Sie <code>/dream</code> in Claude Code eingeben, passiert Folgendes:</span>
+                <span data-lang="en">The <code>/dream</code> command in Claude Code solves exactly this problem. When you enter <code>/dream</code> in Claude Code, here's what happens:</span>
+            </p>
+
+            <div class="architecture-box">
+                <h4><span data-lang="de">So funktioniert /dream</span><span data-lang="en">How /dream Works</span></h4>
+                <div class="arch-flow">
+                    <div class="arch-node">🌙 /dream</div>
+                    <div class="arch-arrow">⟶</div>
+                    <div class="arch-node highlight">🔍 Codebase-Analyse</div>
+                    <div class="arch-arrow">⟶</div>
+                    <div class="arch-node">📝 CLAUDE.md + Memory</div>
+                </div>
+            </div>
+
+            <ol>
+                <li>
+                    <strong><span data-lang="de">Autonome Codebase-Analyse</span><span data-lang="en">Autonomous Codebase Analysis</span></strong> –
+                    <span data-lang="de">Claude durchforstet Ihren gesamten Projektcode: Dateistruktur, Dependencies, Architektur-Patterns, Build-Konfigurationen und Konventionen.</span>
+                    <span data-lang="en">Claude thoroughly examines your entire project code: file structure, dependencies, architecture patterns, build configurations, and conventions.</span>
+                </li>
+                <li>
+                    <strong><span data-lang="de">Pattern-Erkennung</span><span data-lang="en">Pattern Recognition</span></strong> –
+                    <span data-lang="de">Der Agent identifiziert wiederkehrende Muster, Coding-Stile, Namenskonventionen und architektonische Entscheidungen, die sich durch das Projekt ziehen.</span>
+                    <span data-lang="en">The agent identifies recurring patterns, coding styles, naming conventions, and architectural decisions that run through the project.</span>
+                </li>
+                <li>
+                    <strong><span data-lang="de">Memory-Aufbau</span><span data-lang="en">Memory Building</span></strong> –
+                    <span data-lang="de">Alle Erkenntnisse werden strukturiert in CLAUDE.md und Auto-Memory-Dateien geschrieben – kategorisiert nach Themen wie Debugging, API-Konventionen oder Test-Strategien.</span>
+                    <span data-lang="en">All insights are structured and written into CLAUDE.md and auto memory files – categorized by topics like debugging, API conventions, or test strategies.</span>
+                </li>
+                <li>
+                    <strong><span data-lang="de">Tiefes Projektverständnis</span><span data-lang="en">Deep Project Understanding</span></strong> –
+                    <span data-lang="de">Ab der nächsten Session hat Claude ein umfassendes Verständnis Ihres Projekts – ohne dass Sie erklären oder korrigieren müssen.</span>
+                    <span data-lang="en">From the next session on, Claude has a comprehensive understanding of your project – without you having to explain or correct anything.</span>
+                </li>
+            </ol>
+
+            <div class="highlight-box">
+                <h4>💡 <span data-lang="de">Warum „Dream"?</span><span data-lang="en">Why "Dream"?</span></h4>
+                <p>
+                    <span data-lang="de">Der Name ist eine Analogie zum menschlichen Schlaf: Während wir schlafen, konsolidiert unser Gehirn Erfahrungen und bildet Langzeit-Erinnerungen. <code>/dream</code> macht dasselbe für Claude – der Agent „schläft" über Ihrer Codebasis und wacht mit einem deutlich besseren Verständnis auf.</span>
+                    <span data-lang="en">The name is an analogy to human sleep: while we sleep, our brain consolidates experiences and forms long-term memories. <code>/dream</code> does the same for Claude – the agent "sleeps" over your codebase and wakes up with a significantly better understanding.</span>
+                </p>
+            </div>
+
+            <h2><span data-lang="de">Memory 1.0 vs. Memory 2.0: Was hat sich verändert?</span><span data-lang="en">Memory 1.0 vs. Memory 2.0: What Changed?</span></h2>
+
+            <p>
+                <span data-lang="de">Die bisherige Memory-Architektur in Claude Code funktionierte <strong>reaktiv</strong>: Claude lernte nur aus dem, was in der aktuellen Session passierte. Das neue System mit <code>/dream</code> arbeitet <strong>proaktiv</strong>:</span>
+                <span data-lang="en">The previous memory architecture in Claude Code worked <strong>reactively</strong>: Claude only learned from what happened in the current session. The new system with <code>/dream</code> works <strong>proactively</strong>:</span>
+            </p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card" style="border-left: 3px solid var(--muted);">
+                    <h4>🔄 <span data-lang="de">Memory 1.0 (reaktiv)</span><span data-lang="en">Memory 1.0 (reactive)</span></h4>
+                    <ul style="font-size: 0.9rem;">
+                        <li><span data-lang="de">Lernt nur aus Gesprächen</span><span data-lang="en">Learns only from conversations</span></li>
+                        <li><span data-lang="de">Manuelles CLAUDE.md-Pflegen nötig</span><span data-lang="en">Manual CLAUDE.md maintenance needed</span></li>
+                        <li><span data-lang="de">Inkrementelles Wissen</span><span data-lang="en">Incremental knowledge</span></li>
+                        <li><span data-lang="de">Oberflächliches Projektverständnis</span><span data-lang="en">Superficial project understanding</span></li>
+                    </ul>
+                </div>
+                <div class="comparison-card" style="border-left: 3px solid var(--green);">
+                    <h4>🌙 <span data-lang="de">Memory 2.0 (/dream)</span><span data-lang="en">Memory 2.0 (/dream)</span></h4>
+                    <ul style="font-size: 0.9rem;">
+                        <li><span data-lang="de">Analysiert die gesamte Codebasis</span><span data-lang="en">Analyzes the entire codebase</span></li>
+                        <li><span data-lang="de">Automatische Dokumentation</span><span data-lang="en">Automatic documentation</span></li>
+                        <li><span data-lang="de">Systematisches, tiefes Wissen</span><span data-lang="en">Systematic, deep knowledge</span></li>
+                        <li><span data-lang="de">Sofortige Produktivität ab Session 1</span><span data-lang="en">Immediate productivity from session 1</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2><span data-lang="de">Das Memory-System im Detail</span><span data-lang="en">The Memory System in Detail</span></h2>
+
+            <p>
+                <span data-lang="de">Claude Codes Memory-System besteht aus mehreren Ebenen, die sich ergänzen:</span>
+                <span data-lang="en">Claude Code's memory system consists of several complementary layers:</span>
+            </p>
+
+            <h3><span data-lang="de">CLAUDE.md – Ihre Projekt-Anweisungen</span><span data-lang="en">CLAUDE.md – Your Project Instructions</span></h3>
+
+            <p>
+                <span data-lang="de">Die <code>CLAUDE.md</code>-Datei ist das Herzstück: Sie können sie auf verschiedenen Ebenen platzieren – pro Projekt (<code>./CLAUDE.md</code>), pro User (<code>~/.claude/CLAUDE.md</code>) oder sogar organisationsweit. Claude liest sie bei jedem Session-Start vollständig ein.</span>
+                <span data-lang="en">The <code>CLAUDE.md</code> file is the core: you can place it at different levels – per project (<code>./CLAUDE.md</code>), per user (<code>~/.claude/CLAUDE.md</code>), or even organization-wide. Claude reads it fully at every session start.</span>
+            </p>
+
+            <h3><span data-lang="de">Auto Memory – Claude lernt selbst</span><span data-lang="en">Auto Memory – Claude Learns on Its Own</span></h3>
+
+            <p>
+                <span data-lang="de">Seit Version 2.1.59 kann Claude automatisch Notizen für sich selbst speichern: Build-Befehle, Debugging-Insights, Architektur-Notizen und Code-Style-Präferenzen. Diese werden in <code>~/.claude/projects/&lt;project&gt;/memory/</code> als plain Markdown abgelegt – vollständig transparent und editierbar.</span>
+                <span data-lang="en">Since version 2.1.59, Claude can automatically save notes for itself: build commands, debugging insights, architecture notes, and code style preferences. These are stored in <code>~/.claude/projects/&lt;project&gt;/memory/</code> as plain Markdown – fully transparent and editable.</span>
+            </p>
+
+            <h3><span data-lang="de">/dream – Der Turbo für das Gedächtnis</span><span data-lang="en">/dream – The Turbo for Memory</span></h3>
+
+            <p>
+                <span data-lang="de"><code>/dream</code> kombiniert beides und geht einen Schritt weiter: Statt auf Ihre Korrekturen zu warten, wird Claude <strong>proaktiv</strong>. Der Agent durchforstet eigenständig den gesamten Code, erkennt Muster und füllt seine Memory-Dateien mit strukturiertem Projektwissen.</span>
+                <span data-lang="en"><code>/dream</code> combines both and goes a step further: instead of waiting for your corrections, Claude becomes <strong>proactive</strong>. The agent independently explores the entire code, recognizes patterns, and fills its memory files with structured project knowledge.</span>
+            </p>
+
+            <pre><code># Beispiel: Memory-Struktur nach /dream
+~/.claude/projects/mein-projekt/memory/
+├── MEMORY.md              # Index – wird bei jeder Session geladen
+├── architecture.md        # Architektur-Entscheidungen
+├── api-conventions.md     # API-Design-Patterns
+├── debugging.md           # Debugging-Strategien
+├── build-and-deploy.md    # Build- und Deploy-Prozesse
+└── testing.md             # Test-Konventionen</code></pre>
+
+            <h2><span data-lang="de">Was bedeutet das für Unternehmen?</span><span data-lang="en">What Does This Mean for Companies?</span></h2>
+
+            <p>
+                <span data-lang="de">Für mittelständische Unternehmen, die KI-Coding-Agenten einsetzen oder einsetzen wollen, ist <code>/dream</code> ein signifikanter Produktivitätsschub:</span>
+                <span data-lang="en">For medium-sized companies that use or want to use AI coding agents, <code>/dream</code> is a significant productivity boost:</span>
+            </p>
+
+            <ul>
+                <li><strong><span data-lang="de">Schnelleres Onboarding neuer Entwickler</span><span data-lang="en">Faster onboarding of new developers</span></strong> –
+                    <span data-lang="de">Claude kennt das Projekt sofort und kann neuen Teammitgliedern sofort qualifiziert helfen.</span>
+                    <span data-lang="en">Claude knows the project immediately and can help new team members right away.</span>
+                </li>
+                <li><strong><span data-lang="de">Konsistente Code-Qualität</span><span data-lang="en">Consistent code quality</span></strong> –
+                    <span data-lang="de">Da der Agent die Coding-Konventionen aus dem bestehenden Code erlernt, hält er sich automatisch daran.</span>
+                    <span data-lang="en">Since the agent learns coding conventions from existing code, it automatically adheres to them.</span>
+                </li>
+                <li><strong><span data-lang="de">Weniger Kontextwechsel</span><span data-lang="en">Less context switching</span></strong> –
+                    <span data-lang="de">Kein wiederholtes Erklären von Projektstrukturen oder Architektur-Entscheidungen.</span>
+                    <span data-lang="en">No repeated explaining of project structures or architecture decisions.</span>
+                </li>
+                <li><strong><span data-lang="de">Dokumentation als Nebenprodukt</span><span data-lang="en">Documentation as a byproduct</span></strong> –
+                    <span data-lang="de">Die Memory-Dateien sind effektiv eine lebende Projekt-Dokumentation.</span>
+                    <span data-lang="en">The memory files are effectively a living project documentation.</span>
+                </li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>⚠️ <span data-lang="de">Wichtig für den Unternehmenseinsatz</span><span data-lang="en">Important for Enterprise Use</span></h4>
+                <p>
+                    <span data-lang="de">Auto Memory-Dateien sind <strong>maschinenlokal</strong> – sie werden nicht automatisch mit Cloud-Diensten synchronisiert. Für Teams empfiehlt sich eine Kombination aus geteilten <code>CLAUDE.md</code>-Dateien (via Git) und individuellen Memory-Dateien pro Entwickler. Organisationsweite CLAUDE.md-Dateien können über IT-Management-Tools (MDM, Group Policy, Ansible) auf allen Entwicklermaschinen verteilt werden.</span>
+                    <span data-lang="en">Auto memory files are <strong>machine-local</strong> – they're not automatically synchronized with cloud services. For teams, a combination of shared <code>CLAUDE.md</code> files (via Git) and individual memory files per developer is recommended. Organization-wide CLAUDE.md files can be distributed across all developer machines via IT management tools (MDM, Group Policy, Ansible).</span>
+                </p>
+            </div>
+
+            <h2><span data-lang="de">Praxistipp: So nutzen Sie /dream optimal</span><span data-lang="en">Practical Tip: How to Use /dream Optimally</span></h2>
+
+            <ol>
+                <li>
+                    <strong><span data-lang="de">Starten Sie <code>/dream</code> bei einem neuen Projekt</span><span data-lang="en">Start <code>/dream</code> on a new project</span></strong> –
+                    <span data-lang="de">Lassen Sie Claude das Projekt analysieren, bevor Sie anfangen zu arbeiten.</span>
+                    <span data-lang="en">Let Claude analyze the project before you start working.</span>
+                </li>
+                <li>
+                    <strong><span data-lang="de">Reviewen Sie die Memory-Dateien</span><span data-lang="en">Review the memory files</span></strong> –
+                    <span data-lang="de">Nutzen Sie <code>/memory</code>, um zu sehen, was Claude gelernt hat. Korrigieren Sie Fehler und ergänzen Sie fehlende Informationen.</span>
+                    <span data-lang="en">Use <code>/memory</code> to see what Claude has learned. Correct errors and add missing information.</span>
+                </li>
+                <li>
+                    <strong><span data-lang="de">Halten Sie CLAUDE.md schlank</span><span data-lang="en">Keep CLAUDE.md lean</span></strong> –
+                    <span data-lang="de">Maximal 200 Zeilen pro Datei. Nutzen Sie <code>.claude/rules/</code> für themenspezifische Anweisungen und Imports für externe Dateien.</span>
+                    <span data-lang="en">Maximum 200 lines per file. Use <code>.claude/rules/</code> for topic-specific instructions and imports for external files.</span>
+                </li>
+                <li>
+                    <strong><span data-lang="de">Wiederholen Sie /dream regelmäßig</span><span data-lang="en">Repeat /dream regularly</span></strong> –
+                    <span data-lang="de">Nach größeren Refactorings oder neuen Features. So bleibt das Gedächtnis aktuell.</span>
+                    <span data-lang="en">After major refactorings or new features. This keeps the memory current.</span>
+                </li>
+            </ol>
+
+            <h2><span data-lang="de">Das Video: Claude Code's Hidden /dream Feature</span><span data-lang="en">The Video: Claude Code's Hidden /dream Feature</span></h2>
+
+            <p>
+                <span data-lang="de">In diesem Video von Chase AI wird das <code>/dream</code>-Feature im Detail vorgestellt und demonstriert, wie es die Memory-Fähigkeiten von Claude Code massiv verbessert:</span>
+                <span data-lang="en">In this video by Chase AI, the <code>/dream</code> feature is presented in detail, demonstrating how it massively improves Claude Code's memory capabilities:</span>
+            </p>
+
+            <div class="video-embed">
+                <iframe src="https://www.youtube.com/embed/E-1Lmyv6Cjo"
+                    title="Claude Code's Hidden /dream Feature MASSIVELY Upgrades Memory"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+
+            <h2><span data-lang="de">Fazit: Die Zukunft gehört proaktiven KI-Agenten</span><span data-lang="en">Conclusion: The Future Belongs to Proactive AI Agents</span></h2>
+
+            <p>
+                <span data-lang="de"><code>/dream</code> ist mehr als ein Feature-Update – es ist ein Paradigmenwechsel in der Art, wie KI-Agenten mit Codebases arbeiten. Statt passiv auf Anweisungen zu warten, analysieren sie <strong>eigenständig</strong> das Projekt und bauen ein tiefes Verständnis auf.</span>
+                <span data-lang="en"><code>/dream</code> is more than a feature update – it's a paradigm shift in how AI agents work with codebases. Instead of passively waiting for instructions, they <strong>autonomously</strong> analyze the project and build a deep understanding.</span>
+            </p>
+
+            <p>
+                <span data-lang="de">Für Unternehmen, die KI in ihren Entwicklungsprozess integrieren, bedeutet das: <strong>Die KI-Agenten von morgen werden nicht nur Befehle ausführen – sie werden Ihr Projekt verstehen.</strong> Und mit jedem <code>/dream</code>-Zyklus werden sie besser.</span>
+                <span data-lang="en">For companies integrating AI into their development process, this means: <strong>tomorrow's AI agents won't just execute commands – they'll understand your project.</strong> And with each <code>/dream</code> cycle, they get better.</span>
+            </p>
+
+            <p>
+                <span data-lang="de">Das ist die Richtung, in die sich die gesamte KI-Agentenlandschaft bewegt – und Unternehmen, die jetzt anfangen, diese Tools strategisch einzusetzen, werden einen deutlichen Vorsprung haben.</span>
+                <span data-lang="en">This is the direction the entire AI agent landscape is moving – and companies that start strategically deploying these tools now will have a significant head start.</span>
+            </p>
+
+            <div class="cta-box">
+                <h3><span data-lang="en">Want to integrate AI coding agents into your team?</span><span data-lang="de">Möchten Sie KI-Coding-Agenten in Ihrem Team einsetzen?</span></h3>
+                <p><span data-lang="en">Let's discuss how tools like Claude Code can boost your development team's productivity.</span><span data-lang="de">Lassen Sie uns besprechen, wie Tools wie Claude Code die Produktivität Ihres Entwicklungsteams steigern können.</span></p>
+                <a href="https://calendly.com/elmadbouh/30min" class="btn btn-white">
+                    <i class="fas fa-calendar"></i> <span data-lang="en">Book Expert Call</span><span
+                        data-lang="de">Expertengespräch buchen</span>
+                </a>
+            </div>
+
+        </div>
+    </article>
+
+    <footer>
+        <div class="footer-inner">
+            <p class="footer-copy">© 2026 Adil El Madbouh. <span data-lang="en">All rights reserved.</span><span
+                    data-lang="de">Alle Rechte vorbehalten.</span></p>
+            <div class="footer-links">
+                <a href="/impressum.html">Impressum</a>
+                <a href="/datenschutz.html">Datenschutz</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleLang() { document.body.classList.toggle('en'); localStorage.setItem('lang', document.body.classList.contains('en') ? 'en' : 'de'); document.documentElement.lang = document.body.classList.contains('en') ? 'en' : 'de' }
+        if (localStorage.getItem('lang') === 'en') { document.body.classList.add('en'); document.documentElement.lang = 'en' }
+        function toggleMobileMenu() { const n = document.querySelector('.nav-links'), b = document.querySelector('.mobile-toggle'); const o = n.classList.toggle('open'); b.textContent = o ? '✕' : '☰'; b.setAttribute('aria-label', o ? 'Menü schließen' : 'Menü öffnen') }
+        document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => { const n = document.querySelector('.nav-links'), b = document.querySelector('.mobile-toggle'); if (n.classList.contains('open')) { n.classList.remove('open'); b.textContent = '☰' } }))
+    </script>
+</body>
+
+</html>
